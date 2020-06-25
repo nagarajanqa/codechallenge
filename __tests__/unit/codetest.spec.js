@@ -1,62 +1,45 @@
-const assert = require("assert").strict;
 const codeLibrary = require("./CodeLibrary");
 describe("Verify whether the passed string is palindrome or not ", () => {
-  it("Verify whether the passed string with valid value is palindrome", () => {
-    let strVal = 'radar';
-    let actVal = codeLibrary.isStrPalindrome(strVal);
-    assert.equal(actVal, strVal)
+  it("Verify whether the passed string with case sensitive value is palindrome", () => {
+    let actVal = codeLibrary.isStrPalindromeCaseSensitive('radar');
+    expect(actVal).toBeTruthy();
   });
 
-  it("Verify that the given string with invalid value is palindrome", () => {
-    let strVal = 'sun';
-    let actVal = codeLibrary.isStrPalindrome(strVal);
-    assert.equal(actVal, strVal)
-  });
+  it("Verify whether the passed string with case insensitive value is palindrome", () => {
+    let actVal = codeLibrary.isStrPalindromeCaseInSensitive('CiviC');
+    expect(actVal).toBeTruthy();
+  });  
 
-  it("Verify that the passed string is empty", () => {
-    let strVal = '';
-    let actVal = codeLibrary.isStrPalindrome(strVal);
-    assert.equal(actVal, strVal);
-  });
+  it("Verify whether the passed string with special character value is palindrome", () => {
+    let actVal = codeLibrary.isStrPalindromeCaseInSensitive('civic!@#');
+    expect(actVal).toBeFalsy();
+  });  
 
-  it("Verify that the Passed string has any space", () => {
-    let strVal = '  test ';
-    let actVal = codeLibrary.isStrPalindrome(strVal);
-    assert.equal(actVal, strVal);
-  });
+  it("Verify that the passed string is empty", () => {    
+    let actVal = codeLibrary.isStrPalindromeCaseInSensitive('');
+    expect(actVal).toBeFalsy();
+  }); 
 
-  it("Verify that the Passed string length is less than 3", () => {
-    let strVal = 're';
-    let actVal = codeLibrary.isStrPalindrome(strVal);
-    assert.equal(actVal, strVal);
-  });
-
-  it("Verify that the Passed string has any special characters", () => {
-    let strVal = 'civic!@#';
-    let actVal = codeLibrary.isStrPalindrome(strVal);
-    assert.equal(actVal, strVal);
-  });
 });
 
 describe("To remove the extra whitespace from a given string", () => { 
   it("Verify that the extra white space is removed in the string", () => {
     let strVal = ' this is a first node script ';
     let expVal = 'this is a first node script';
-    let actVal = codeLibrary.removeExtraWhiteSpace(strVal);
-    assert.equal(actVal, expVal)
+    let actVal = codeLibrary.removeExtraWhiteSpace(strVal);    
+    expect(actVal).toBe(expVal)    
+  });
+
+   it("Verify that the all white spaces are removed in the string", () => {
+    let strVal = ' this is a first node script ';
+    let expVal = 'thisisafirstnodescript';
+    let actVal = codeLibrary.removeAllWhiteSpaces(strVal);
+    expect(actVal).toBe(expVal)    
   });
 
   it("Verify that the passed string is empty", () => {
-    let strVal = '';
-    let expVal = 'this is a first node script';
-    let actVal = codeLibrary.removeExtraWhiteSpace(strVal);
-    assert.equal(actVal, expVal)
+    let actVal = codeLibrary.removeExtraWhiteSpace('');
+    expect(actVal).toBe('Passed string is empty')    
   });
 
-  it("Verify that the passed string is a number ", () => {
-    let strVal = '123';
-    let expVal = 'this is a first node script';
-    let actVal = codeLibrary.removeExtraWhiteSpace(strVal);
-    assert.equal(actVal, expVal)
-  });
 });
