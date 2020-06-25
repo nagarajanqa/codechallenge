@@ -13,6 +13,6 @@
 - Verify that the passed string is empty
 
 ## To run the Test Script 
-- Go to Terminal > Type npm run test-dev codetest.spec.js
+- Go to Terminal > Type npm run test-dev
 
 
