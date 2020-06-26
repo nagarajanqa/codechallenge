@@ -20,25 +20,14 @@
 ### CodeLibrary.js
 
 ```shell
-exports.isStrPalindromeCaseSensitive = (str) => {
+exports.isStrPalindrome = (str, caseInSensitive) => {
+  str = caseInSensitive ? str : str.toLowerCase();
   let result = str;
   let c = '';
   for (let i = str.length - 1; i >= 0; i--) {
     c = c + str.charAt(i);
   }
-   return str === '' ? false : result === c;
-}
-```
-
-```shell
-exports.isStrPalindromeCaseInSensitive = (str) => {
-  str=str.toLowerCase();
-  let result = str;
-  let c = '';
-  for (let i = str.length - 1; i >= 0; i--) {
-    c = c + str.charAt(i);
-  }
-   return str === '' ? false : result === c;
+  return str === '' ? false : result === c;
 }
 ```
 
@@ -46,8 +35,8 @@ exports.isStrPalindromeCaseInSensitive = (str) => {
 exports.removeExtraWhiteSpace = (str) => {
   if (str === '') {
     return 'Passed string is empty';
-  } 
-    return str.replace(/\s+/g, ' ').trim(); 
+  }
+  return str.replace(/\s+/g, ' ').trim();
 }
 ```
 
@@ -55,11 +44,10 @@ exports.removeExtraWhiteSpace = (str) => {
 exports.removeAllWhiteSpaces = (str) => {
   let arr = str.split(" ")
   let result = "";
-  for (i = 0; i < arr.length; i++) { 
-    if( arr[i]!==" ")
-    {   
-      result = result + arr[i]; 
-    }  
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] !== " ") {
+      result = result + arr[i];
+    }
   }
   return result;
 }
@@ -70,48 +58,48 @@ exports.removeAllWhiteSpaces = (str) => {
 ```shell
 describe("Verify whether the passed string is palindrome or not ", () => {
   it("Verify whether the passed string with case sensitive value is palindrome", () => {
-    let actVal = codeLibrary.isStrPalindromeCaseSensitive('radar');
+    let actVal = codeLibrary.isStrPalindrome('CiviC', false);
     expect(actVal).toBeTruthy();
   });
 
   it("Verify whether the passed string with case insensitive value is palindrome", () => {
-    let actVal = codeLibrary.isStrPalindromeCaseInSensitive('CiviC');
+    let actVal = codeLibrary.isStrPalindrome('CiviC', true);
     expect(actVal).toBeTruthy();
-  });  
+  });
 
   it("Verify whether the passed string with special character value is palindrome", () => {
-    let actVal = codeLibrary.isStrPalindromeCaseInSensitive('civic!@#');
+    let actVal = codeLibrary.isStrPalindrome('civic!@#');
     expect(actVal).toBeFalsy();
-  });  
+  });
 
-  it("Verify that the passed string is empty", () => {    
-    let actVal = codeLibrary.isStrPalindromeCaseInSensitive('');
+  it("Verify that the passed string is empty", () => {
+    let actVal = codeLibrary.isStrPalindrome('');
     expect(actVal).toBeFalsy();
-  }); 
+  });
 
 });
 ```
 
 ### codetest.spec.js > Remove Extra Whitespace
 ```shell
-describe("To remove the extra whitespace from a given string", () => { 
+describe("To remove the extra whitespace from the given string", () => {
   it("Verify that the extra white space is removed in the string", () => {
     let strVal = ' this is a first node script ';
     let expVal = 'this is a first node script';
-    let actVal = codeLibrary.removeExtraWhiteSpace(strVal);    
-    expect(actVal).toBe(expVal)    
+    let actVal = codeLibrary.removeExtraWhiteSpace(strVal);
+    expect(actVal).toBe(expVal)
   });
 
-   it("Verify that the all white spaces are removed in the string", () => {
+  it("Verify that the all white spaces are removed in the string", () => {
     let strVal = ' this is a first node script ';
     let expVal = 'thisisafirstnodescript';
     let actVal = codeLibrary.removeAllWhiteSpaces(strVal);
-    expect(actVal).toBe(expVal)    
+    expect(actVal).toBe(expVal)
   });
 
   it("Verify that the passed string is empty", () => {
     let actVal = codeLibrary.removeExtraWhiteSpace('');
-    expect(actVal).toBe('Passed string is empty')    
+    expect(actVal).toBe('Passed string is empty')
   });
 
 });
